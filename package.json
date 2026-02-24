@@ -1,0 +1,30 @@
+{
+  "name": "rogue-neural-ai-hijack-simulator",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "next": "^14.2.4",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "groq-sdk": "^0.3.3",
+    "canvas-confetti": "^1.9.2",
+    "framer-motion": "^11.0.3",
+    "@next/font": "^14.2.4"
+  },
+  "devDependencies": {
+    "typescript": "^5.3.3",
+    "@types/node": "^20.11.7",
+    "@types/react": "^18.2.48",
+    "@types/react-dom": "^18.2.18",
+    "@types/canvas-confetti": "^1.6.4",
+    "tailwindcss": "^3.4.1",
+    "autoprefixer": "^10.4.17",
+    "postcss": "^8.4.35"
+  }
+}
