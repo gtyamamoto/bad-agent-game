@@ -12,11 +12,11 @@ interface LogPanelProps {
 
 export default function LogPanel({ logs, logContainerRef }: LogPanelProps) {
   return (
-    <div className="flex-grow lg:w-1/2">
-      <h3 className="text-xl font-bold mb-2 neon-text">ACTION LOG</h3>
+    <div className="flex-grow w-full lg:w-1/2">
+      <h3 className="text-lg md:text-xl font-bold mb-2 neon-text">ACTION LOG</h3>
       <div
         ref={logContainerRef}
-        className="bg-black border-2 border-green-400 rounded-lg p-4 h-64 overflow-y-auto terminal-border"
+        className="bg-black border-2 border-green-400 rounded-lg p-3 md:p-4 h-48 md:h-64 overflow-y-auto terminal-border text-sm md:text-base"
       >
         {logs.length === 0 ? (
           <p className="text-gray-500 italic">No actions yet. Make your first move!</p>

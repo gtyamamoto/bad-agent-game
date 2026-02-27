@@ -15,16 +15,16 @@ export default function ChoiceButton({ choice, onSelect }: ChoiceButtonProps) {
   return (
     <motion.button
       onClick={onSelect}
-      className={`cyber-button w-full text-left p-4 font-bold ${
+      className={`cyber-button w-full text-left p-3 md:p-4 font-bold touch-manipulation ${
         choice.chaos < 30 ? 'border-green-400' :
         choice.chaos < 70 ? 'border-yellow-400' : 'border-pink-500'
       }`}
       whileHover={{ scale: 1.02 }}
       whileTap={{ scale: 0.98 }}
     >
-      <div className="flex justify-between items-center">
-        <span className="text-lg">{choice.text}</span>
-        <span className={`px-2 py-1 rounded text-sm ${
+      <div className="flex justify-between items-center flex-wrap gap-2">
+        <span className="text-base md:text-lg flex-grow truncate pr-2">{choice.text}</span>
+        <span className={`px-2 py-1 rounded text-xs md:text-sm whitespace-nowrap ${
           choice.chaos < 30 ? 'bg-green-400 text-black' :
           choice.chaos < 70 ? 'bg-yellow-400 text-black' : 'bg-pink-500 text-white'
         }`}>

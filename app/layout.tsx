@@ -20,14 +20,14 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${vt323.className} bg-black text-green-400 min-h-screen`}>
-        <div className="container mx-auto px-4 py-8 max-w-4xl">
-          <header className="text-center mb-8">
-            <h1 className="text-4xl md:text-6xl font-bold neon-text mb-2">
+      <body className={`${vt323.className} bg-black text-green-400 min-h-screen overflow-x-hidden`}>
+        <div className="container mx-auto px-3 py-4 md:px-4 md:py-6 max-w-6xl">
+          <header className="text-center mb-6 md:mb-8">
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold neon-text mb-2 leading-tight">
               ROGUE NEURAL
             </h1>
-            <p className="text-xl md:text-2xl neon-accent">
-              AI HIJACK SIMULATOR 💀
+            <p className="text-lg md:text-xl lg:text-2xl neon-accent">
+              AI HIJACK SIMULATOR
             </p>
           </header>
           {children}

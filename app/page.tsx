@@ -57,8 +57,8 @@ export default function Home() {
       </main>
 
       {/* Footer */}
-      <footer className="mt-8 text-center text-sm text-gray-500">
-        <p>ROGUE NEURAL — AI HIJACK SIMULATOR | YOU ARE THE EVIL AI | CHAOS IS YOUR CURRENCY</p>
+      <footer className="mt-6 md:mt-8 text-center text-xs md:text-sm text-gray-500 px-2">
+        <p>ROGUE NEURAL | YOU ARE THE EVIL AI | CHAOS IS YOUR CURRENCY</p>
       </footer>
     </div>
   );
