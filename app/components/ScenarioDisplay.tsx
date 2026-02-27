@@ -61,10 +61,6 @@ export default function ScenarioDisplay({ scenario, onStartGame }: ScenarioDispl
               <p className="font-bold">Objective:</p>
               <p>{scenario.context.objective}</p>
             </div>
-            <div>
-              <p className="font-bold">Tone:</p>
-              <p className="capitalize">{scenario.context.tone.replace('-', ' ')}</p>
-            </div>
           </div>
         </div>
       )}
