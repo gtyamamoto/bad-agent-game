@@ -1,0 +1,248 @@
+# Game Flow Diagram
+
+## ROGUE NEURAL - Game State Flow
+
+```mermaid
+stateDiagram-v2
+    [*] --> Loading: Game Init
+
+    Loading: Loading Screen
+    Loading --> Scenario: Scenario Loaded
+
+    Scenario: Scenario Display
+    Scenario --> Playing: User Starts
+
+    Playing: Active Gameplay
+    Playing --> Ending_Choice: Choice Made
+    Playing --> Playing: Phase Transition
+
+    Ending_Choice: Processing Result
+    Ending_Choice --> Ending_Calculation: Chaos Threshold Check
+
+    Ending_Calculation: Calculate Ending
+    Ending_Calculation --> GameEnd_Explosion: High Chaos
+    Ending_Calculation --> GameEnd_Hackerman: Low Chaos
+    Ending_Calculation --> GameEnd_Betrayal: Medium Chaos
+
+    GameEnd_Explosion: Explosive Ending
+    GameEnd_Hackerman: "Hackerman" Ending
+    GameEnd_Betrayal: Betrayal Ending
+
+    GameEnd_Explosion --> [*]
+    GameEnd_Hackerman --> [*]
+    GameEnd_Betrayal --> [*]
+
+    Playing --> Reset: Reset Requested
+    Scenario --> Reset: Reset Requested
+```
+
+---
+
+## ROGUE NEURAL - Component Architecture
+
+```mermaid
+classDiagram
+    class Home {
+        +useGameLogic()
+        +renderChaosMeter()
+        +renderScenarioDisplay()
+        +renderGameInterface()
+    }
+
+    class useGameLogic {
+        +gameState
+        +scenario
+        +phases
+        +chaosLevel
+        +logs
+        +startGame()
+        +handleChoice()
+        +resetGame()
+    }
+
+    class ChaosMeter {
+        +chaosLevel: number
+        +renderMeter()
+    }
+
+    class ScenarioDisplay {
+        +scenario: Scenario
+        +onStartGame()
+    }
+
+    class GameInterface {
+        +currentPhase: Phase
+        +phases: Phase[]
+        +logs: Log[]
+        +choices: Choice[]
+        +chaosLevel: number
+        +onChoiceSelect()
+    }
+
+    class LogPanel {
+        +logs: Log[]
+        +renderLogs()
+    }
+
+    class ScenarioDisplay {
+        +scenario: Scenario
+        +renderScenario()
+    }
+
+    class ChoiceButton {
+        +choice: Choice
+        +onSelect()
+    }
+
+    Home --> useGameLogic : uses
+    Home --> ChaosMeter : renders
+    Home --> ScenarioDisplay : renders
+    Home --> GameInterface : renders
+    GameInterface --> LogPanel : renders
+    GameInterface --> ScenarioDisplay : renders
+    GameInterface --> ChoiceButton : renders multiple
+```
+
+---
+
+## ROGUE NEURAL - Data Model
+
+```mermaid
+classDiagram
+    class Game {
+        +GameId: string
+        +State: GameState
+        +ChaosLevel: number
+        +CurrentPhaseIndex: number
+    }
+
+    class Scenario {
+        +ScenarioId: string
+        +Title: string
+        +Description: string
+        +Context: string
+        +Entities: Entity[]
+    }
+
+    class Phase {
+        +PhaseId: string
+        +Title: string
+        +Prompt: string
+        +Choices: Choice[]
+        +AIContext: AIContext
+    }
+
+    class Choice {
+        +ChoiceId: string
+        +Text: string
+        +ChaosImpact: number
+        +NarrativeImpact: NarrativeImpact
+    }
+
+    class Log {
+        +LogId: string
+        +Timestamp: Date
+        +Type: LogType
+        +Content: string
+    }
+
+    class Entity {
+        +EntityId: string
+        +Name: string
+        +Role: string
+        +Personality: string
+        +InternalMonologue: Monologue[]
+    }
+
+    class Monologue {
+        +Text: string
+        +Tone: Tone
+        +Context: string
+    }
+
+    Game "1" --> "1" Scenario : has
+    Game "1" --> "1..*" Phase : contains
+    Scenario "1" --> "1..*" Entity : contains
+    Phase "1" --> "1..*" Choice : offers
+    Game "1" --> "0..*" Log : generates
+    Entity "1" --> "0..*" Monologue : thinks
+```
+
+---
+
+## ROGUE NEURAL - User Flow
+
+```mermaid
+sequenceDiagram
+    participant User
+    participant Home
+    participant useGameLogic
+    participant ScenarioDisplay
+    participant GameInterface
+    participant ChaosMeter
+    participant LogPanel
+
+    User->>Home: Visit Page
+    Home->>useGameLogic: Initialize
+    useGameLogic->>useGameLogic: Load Initial State
+    useGameLogic->>Home: Return State
+
+    Home->>ScenarioDisplay: Render
+    User->>ScenarioDisplay: Click "Start Game"
+    ScenarioDisplay->>useGameLogic: startGame()
+    useGameLogic->>useGameLogic: Load Scenario
+    useGameLogic->>useGameLogic: Set State: Playing
+    useGameLogic->>Home: Update State
+
+    Home->>GameInterface: Render
+    Home->>ChaosMeter: Render
+    Home->>LogPanel: Render
+
+    loop Gameplay Loop
+        GameInterface->>LogPanel: Show Phase Context
+        GameInterface->>GameInterface: Display Choices
+        User->>GameInterface: Select Choice
+        GameInterface->>useGameLogic: handleChoice(choice)
+        useGameLogic->>useGameLogic: Calculate Chaos Impact
+        useGameLogic->>useGameLogic: Generate Logs
+        useGameLogic->>useGameLogic: Check Phase Transition
+        useGameLogic->>useGameLogic: Update State
+        useGameLogic->>Home: Update State
+        Home->>ChaosMeter: Update Meter
+        Home->>LogPanel: Append Logs
+    end
+
+    User->>GameInterface: Reset Requested
+    GameInterface->>useGameLogic: resetGame()
+    useGameLogic->>useGameLogic: Reset State
+    useGameLogic->>Home: Update State
+    Home->>ScenarioDisplay: Render
+```
+
+---
+
+## ROGUE NEURAL - Chaos Progression
+
+```mermaid
+graph LR
+    A[User Choice] --> B{Chaos Impact}
+    B -->|High| C[Chaos Meter Rises]
+    B -->|Medium| D[Chaos Meter Modifies]
+    B -->|Low| E[Chaos Meter Falls]
+
+    C --> F{Chaos Threshold?}
+    D --> F
+    E --> F
+
+    F -->|Above Max| G[Explosive Ending]
+    F -->|Below Min| H[Hackerman Ending]
+    F -->|In Range| I[Betrayal Ending]
+
+    G --> J[Game Over]
+    H --> J
+    I --> J
+
+    style G fill:#ff4444
+    style H fill:#4444ff
+    style I fill:#ffff44
+```

@@ -2,13 +2,14 @@
 
 ## Overview
 
-The enhanced skill set for ROGUE NEURAL consists of five specialized personas, each focusing on a different aspect of game development and content creation:
+The enhanced skill set for ROGUE NEURAL consists of six specialized personas, each focusing on a different aspect of game development and content creation:
 
 1. **Rogue Developer** - Technical implementation with focus on clean architecture and performance
-2. **Rogue QA** - Quality assurance with emphasis on testing all game features including narrative systems
-3. **Rogue Storyteller** - Creative direction and narrative design for dark comedy content
-4. **Rogue Comedian** - Humor engineering with adult-oriented comedy expertise
-5. **Rogue Persona** - AI character design and internal monologue architecture
+2. **Rogue Architect** - Product & system architecture, game flow design, and technical leadership
+3. **Rogue QA** - Quality assurance with emphasis on testing all game features including narrative systems
+4. **Rogue Storyteller** - Creative direction and narrative design for dark comedy content
+5. **Rogue Comedian** - Humor engineering with adult-oriented comedy expertise
+6. **Rogue Persona** - AI character design and internal monologue architecture
 
 ## Skill Synergies
 
@@ -24,6 +25,9 @@ Two new skills focus specifically on content creation:
 - **Rogue Comedian** provides humor engineering capabilities with broad adult appeal
 - **Rogue Persona** specializes in AI character development and internal monologue consistency
 
+### Architecture & Planning
+- **Rogue Architect** provides full-stack web architecture, game flow design, system diagrams, and task breakdown for development
+
 ## Implementation Guidelines
 
 ### For Developers
@@ -38,9 +42,15 @@ Apply the enhanced Rogue QA skill to test both the technical implementation and 
 ### For Game Designers
 Combine insights from all skills to create a cohesive experience where technical excellence supports creative vision, and quality assurance validates both functionality and fun.
 
+### For Architects
+- Use **Rogue Architect** for system design, component architecture, state management diagrams, and task breakdown
+- Create Mermaid diagrams for game flow, narrative engine, and data models
+- Break down features into developer-ready tasks with clear acceptance criteria
+
 ## Best Practices
 
 1. **Cross-Skill Collaboration**: When working on narrative features, consult both technical (Developer) and creative (Storyteller/Comedian) skills
-2. **Consistency Checks**: Use the Persona skill to maintain AI character consistency across all content
-3. **Quality Validation**: Apply the enhanced QA skill to verify that new features meet both technical and creative standards
-4. **Performance Preservation**: Ensure that enhanced narrative features maintain the high performance standards established by the Developer skill
+2. **Architecture First**: Use the Architect skill for system design and task breakdown before implementation
+3. **Consistency Checks**: Use the Persona skill to maintain AI character consistency across all content
+4. **Quality Validation**: Apply the enhanced QA skill to verify that new features meet both technical and creative standards
+5. **Performance Preservation**: Ensure that enhanced narrative features maintain the high performance standards established by the Developer skill

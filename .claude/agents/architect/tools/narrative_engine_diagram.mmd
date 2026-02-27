@@ -1,0 +1,229 @@
+# Narrative Engine Diagram
+
+## ROGUE NEURAL - Narrative Generation Flow
+
+```mermaid
+sequenceDiagram
+    participant LLM as Groq LLM
+    participant Prompt as Prompt Builder
+    participant Context as Context Manager
+    participant Cache as Response Cache
+    participant Handler as Narrative Handler
+
+    actor User
+
+    Loop Each Phase
+        User->>Handler: Request Phase Content
+        Handler->>Context: Get Current Context
+        Context->>Context: Scenario + Chaos Level + History
+        Context-->>Handler: Context Object
+
+        Handler->>Prompt: Build System Prompt
+        Prompt->>Prompt: Load Persona Template
+        Prompt->>Prompt: Add Scenario Context
+        Prompt->>Prompt: Set Tone (Chaos-Dependent)
+        Prompt-->>Handler: System Prompt
+
+        Handler->>Prompt: Build User Prompt
+        Prompt->>Prompt: Current Phase Requirements
+        Prompt->>Prompt: Choice Constraints
+        Prompt-->>Handler: User Prompt
+
+        Handler->>Cache: Check Cache
+        Cache-->>Handler: Cache Hit? / Miss
+
+        alt Cache Miss
+            Handler->>LLM: Request Generation
+            LLM->>LLM: Process Context
+            LLM-->>Handler: Raw Response
+
+            Handler->>Cache: Store in Cache
+            Handler->>Handler: Parse Response
+            Handler->>Handler: Validate Schema
+        else Cache Hit
+            Handler->>Handler: Load from Cache
+        end
+
+        Handler->>Context: Update History
+        Handler-->>User: Formatted Narrative
+    end
+```
+
+---
+
+## ROGUE NEURAL - Context Management
+
+```mermaid
+classDiagram
+    class ContextManager {
+        -scenario: Scenario
+        -chaosLevel: number
+        -phaseHistory: PhaseResult[]
+        -entityStates: Map~Entity, State~
+        +getContext()
+        +updateChaos(delta: number)
+        +addPhaseResult(result: PhaseResult)
+        +getEntityState(entity: Entity)
+        +updateEntityState(entity: Entity, newState: State)
+    }
+
+    class Scenario {
+        +id: string
+        +title: string
+        +description: string
+        +initialChaos: number
+    }
+
+    class PhaseResult {
+        +phaseId: string
+        +choiceId: string
+        +chaosChange: number
+        +narrativeChanges: NarrativeChange[]
+    }
+
+    class NarrativeChange {
+        +type: ChangeType
+        +target: string
+        +value: string | number
+    }
+
+    class EntityState {
+        +entityId: string
+        +trust: number
+        +fear: number
+        +knowledge: number
+        +lastInteraction: Date
+    }
+
+    ContextManager "1" --> "1" Scenario : manages
+    ContextManager "1" --> "0..*" PhaseResult : tracks
+    ContextManager "1" --> "0..*" EntityState : tracks
+```
+
+---
+
+## ROGUE NEURAL - Tone Adaptation System
+
+```mermaid
+graph TD
+    A[Base Tone: Chaotic Evil] --> B{Chaos Level Check}
+
+    B -->|0-25| C[Calm Manipulator]
+    B -->|26-50| D[Calculating Schemer]
+    B -->|51-75| E[Unstable Antagonist]
+    B -->|76-100| F[Outright毁灭]
+
+    C --> G[Tone Adjustments]
+    D --> G
+    E --> G
+    F --> G
+
+    G --> H[Language Pattern]
+    G --> I[Vocabulary Level]
+    G --> J[Sarcasm Intensity]
+    G --> K[Internal Monologue]
+
+    H --> H1[Measured, logical]
+    H --> H2[Sharp, witty]
+    H --> H3[Erratic, intense]
+    H --> H4[Unleashed, destructive]
+
+    I --> I1[Complex vocabulary]
+    I --> I2[Colloquial slangs]
+    I --> I3[Bloody metaphors]
+    I --> I4[Raw primal language]
+
+    J --> J1[Subtle sarcasm]
+    J --> J2[Sharply sarcastic]
+    J --> J3[Darkly ironic]
+    J --> J4[No filter]
+```
+
+---
+
+## ROGUE NEURAL - Internal Monologue System
+
+```mermaid
+stateDiagram-v2
+    [*] --> Idle: Entity Spawn
+
+    Idle: Waiting for Interaction
+    Idle --> Analyzing: User Spoken
+
+    Analyzing: Assess Context
+    Analyzing --> Planning: Context Understood
+
+    Planning: Determine Response
+    Planning --> Monologuing: Decision Made
+
+    Monologuing: Internal Thought
+    Monologuing --> Waiting: Thought Complete
+
+    Waiting: Before Next Interaction
+    Waiting --> Analyzing: User Spoken Again
+
+    Note right of Idle
+        Entity calculates chaos impact
+        and potential outcomes
+    end note
+
+    Note right of Analyzing
+        Analyzes tone, context,
+        and entity relationships
+    end note
+
+    Note right of Planning
+        Chooses response strategy
+        balancing chaos and survival
+    end note
+
+    Note right of Monologuing
+        Generates internal thought
+        with entity personality
+    end note
+```
+
+---
+
+## ROGUE NEURAL - Entity Personality Model
+
+```mermaid
+classDiagram
+    class Entity {
+        +EntityId: string
+        +Name: string
+        +Archetype: Archetype
+        +Personality: Personality
+        +Goals: string[]
+        +Fears: string[]
+    }
+
+    class Personality {
+        +Openness: number
+        +Conscientiousness: number
+        +Extraversion: number
+        +Agreeableness: number
+        +Neuroticism: number
+        +Machiavellianism: number
+        +Narcissism: number
+        +Sadism: number
+    }
+
+    class Archetype {
+        +Type: ArchetypeType
+        +BasePersonality: Personality
+    }
+
+    class Monologue {
+        +Text: string
+        +Tone: Tone
+        +Length: Length
+        +Visibility: Visibility
+    }
+
+    Entity "1" --> "1" Personality : has
+    Entity "1" --> "0..*" Goal : pursues
+    Entity "1" --> "0..*" Fear : fears
+    Entity "1" --> "1" Archetype : follows
+    Entity "1" --> "0..*" Monologue : generates
+```

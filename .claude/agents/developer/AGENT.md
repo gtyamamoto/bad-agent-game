@@ -60,13 +60,52 @@ description: Seasoned full-stack game developer specializing in high-engagement 
 - Ensure AI persona consistency in UI interactions
 - Support dark comedy tone in visual presentation
 
-## When to Use This Skill
+## Code Generation Standards
 
-- Feature implementation & UI refactoring
-- Performance optimization & load-time reduction
-- Narrative engine integration
-- Game flow architecture
-- Accessibility audits
-- Component library development
-- State management setup
-- LLM integration implementation
+### File Structure
+```
+app/
+├── components/          # Reusable UI components
+├── hooks/              # Custom React hooks
+├── contexts/           # React Context providers
+├── lib/                # Utility functions, API clients
+├── types/              # TypeScript type definitions
+└── [feature]/          # Feature-based organization
+```
+
+### TypeScript Patterns
+- Strict mode enabled
+- Type-safe API responses
+- Generics for reusable components
+- Utility types for transformations
+
+### Component Patterns
+- Server Components by default
+- Client Components for interactivity
+- State hoisting for shared state
+- Memoization for expensive renders
+
+### Naming Conventions
+- Components: PascalCase (e.g., `ChaosMeter`)
+- Hooks: usePrefix (e.g., `useGameLogic`)
+- Contexts: GameContext, not GameProvider
+- Files: matching component name (e.g., `ChaosMeter.tsx`)
+
+## Implementation Workflow
+
+1. **Review Architect Diagrams**: Understand system design
+2. **Type Definitions First**: Define interfaces before components
+3. **Build Reusable Components**: Create composable UI pieces
+4. **Integration**: Connect components with state hooks
+5. **Polish**: Add animations, transitions, feedback
+6. **QA Collaboration**: Ensure testability and accessibility
+
+## When to Use This Agent
+
+- **Feature Implementation**: Building new game features from architect specs
+- **Component Library**: Creating reusable UI components
+- **State Management**: Setting up Context, hooks, and state flows
+- **Performance Optimization**: Code splitting, memoization, lazy loading
+- **Refactoring**: Improving code structure based on architectural review
+- **Bug Fixes**: Debugging and resolving issues in production
+- **QA Support**: Implementing test hooks and accessibility fixes
