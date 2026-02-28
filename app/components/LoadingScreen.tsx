@@ -5,15 +5,17 @@ import { motion } from 'framer-motion';
 export default function LoadingScreen() {
   return (
     <motion.div
+      data-testid="loading-screen"
       key="loading"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       className="flex flex-col items-center justify-center flex-grow"
     >
-      <div className="text-lg md:text-2xl animate-pulse px-2">INITIALIZING ROGUE NEURAL CORE...</div>
-      <div className="mt-3 md:mt-4 w-24 md:w-32 h-1 md:h-2 bg-gray-800 rounded-full overflow-hidden">
+      <div data-testid="loading-text" className="text-lg md:text-2xl animate-pulse px-2">INITIALIZING ROGUE NEURAL CORE...</div>
+      <div data-testid="loading-progress-container" className="mt-3 md:mt-4 w-24 md:w-32 h-1 md:h-2 bg-gray-800 rounded-full overflow-hidden">
         <motion.div
+          data-testid="loading-progress-fill"
           className="h-full bg-green-400"
           initial={{ width: 0 }}
           animate={{ width: '100%' }}

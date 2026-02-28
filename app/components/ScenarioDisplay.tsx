@@ -5,14 +5,16 @@ import type { Scenario } from '../types/game';
 
 interface ExtendedScenario extends Scenario {
   context?: {
+    id: string;
     name: string;
     description: string;
-    tone: string;
+    tone: 'formal' | 'informal' | 'technical' | 'conversational' | 'dramatic';
     setting: string;
     protagonistRole: string;
     objective: string;
   };
   entities?: Array<{
+    id: string;
     name: string;
     personality: string;
     speechPattern: string;

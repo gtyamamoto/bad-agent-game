@@ -2,7 +2,19 @@
   "permissions": {
     "allow": [
       "Bash(ls:*)",
-      "mcp__ide__getDiagnostics"
+      "mcp__ide__getDiagnostics",
+      "Bash(npm install:*)",
+      "Bash(npm run:*)",
+      "Bash(npm test:*)",
+      "Bash(npx tsc:*)",
+      "Bash(npx playwright:*)",
+      "WebFetch(domain:localhost)",
+      "WebFetch(domain:127.0.0.1)",
+      "Bash(lsof:*)",
+      "Bash(curl:*)",
+      "WebSearch",
+      "WebFetch(domain:swc.rs)",
+      "WebFetch(domain:github.com)"
     ]
   }
 }

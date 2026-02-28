@@ -33,8 +33,10 @@ export type LogEntry = {
   phase: string;
   choice: string;
   outcome: string;
-  insight: string;
+  insight?: string;
   chaos: number;
+  diceRoll?: number;
+  diceSuccess?: boolean;
 };
 
 export const PHASES = [

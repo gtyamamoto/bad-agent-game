@@ -47,10 +47,11 @@ export default function Home() {
               logs={logs}
               choices={choices}
               chaosLevel={chaosLevel}
-              gameState={gameState}
+              gameState={gameState as 'playing' | 'ended'}
               isLoading={isLoading}
               onChoiceSelect={handleChoice}
               onResetGame={resetGame}
+              onHealthDepleted={resetGame}
             />
           )}
         </AnimatePresence>

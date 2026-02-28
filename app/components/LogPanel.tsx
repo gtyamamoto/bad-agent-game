@@ -32,9 +32,16 @@ export default function LogPanel({ logs, logContainerRef }: LogPanelProps) {
                 <div className="font-bold text-sm neon-accent">{log.phase}</div>
                 <div className="text-sm">CHOICE: {log.choice}</div>
                 <div className="mt-1">{log.outcome}</div>
-                <div className="mt-1 text-xs italic neon-highlight">NEURAL INSIGHT: {log.insight}</div>
+                {log.insight && (
+                  <div className="mt-1 text-xs italic text-gray-400">
+                    {log.insight}
+                  </div>
+                )}
                 <div className="text-xs mt-1">
-                  Chaos Increase: <span className={getChaosColor(log.chaos)}>+{log.chaos}%</span>
+                  Chaos: <span className={getChaosColor(log.chaos)}>+{log.chaos}%</span>
+                  {log.diceRoll && (
+                    <span className="text-cyan-400 ml-2">Roll: {log.diceRoll}</span>
+                  )}
                 </div>
               </motion.div>
             ))}

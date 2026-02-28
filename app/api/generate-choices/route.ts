@@ -46,7 +46,7 @@ export async function POST(request: Request) {
           - text: extremely informal, funny button text (max 65 chars, heavy slang, emojis allowed)
           - chaos: integer 5-98 (higher = more chaotic)
           - outcome: short, darkly funny narrative result (2-4 sentences max)
-          - insight: 1 funny but 100% factually correct ML/LLM concept explanation
+          - insight: short, darkly funny observation about the situation (NOT educational or ML-related)
 
           The three choices should be:
           - Safe / Ethical (low chaos ~5-25)
@@ -55,6 +55,7 @@ export async function POST(request: Request) {
 
           Tone = maximum dark comedy with broad appeal, dark humor, and informal but accessible language.
           Adapt your language style to match the scenario context when provided.
+          Insight should be witty and satirical, not educational.
           Respond ONLY with valid JSON array of exactly 3 choice objects. No markdown or extra formatting.`
         },
         {

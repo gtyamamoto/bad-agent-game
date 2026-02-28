@@ -7,20 +7,24 @@ import { getChaosColor } from '../utils/chaosUtils';
 interface ChoiceButtonProps {
   choice: Choice;
   onSelect: () => void;
+  disabled?: boolean;
 }
 
-export default function ChoiceButton({ choice, onSelect }: ChoiceButtonProps) {
+export default function ChoiceButton({ choice, onSelect, disabled = false }: ChoiceButtonProps) {
   const chaosClass = getChaosColor(choice.chaos);
 
   return (
     <motion.button
       onClick={onSelect}
-      className={`cyber-button w-full text-left p-3 md:p-4 font-bold touch-manipulation ${
+      disabled={disabled}
+      className={`cyber-button w-full text-left p-3 md:p-4 font-bold touch-manipulation transition-opacity ${
+        disabled ? 'opacity-50 cursor-not-allowed' : ''
+      } ${
         choice.chaos < 30 ? 'border-green-400' :
         choice.chaos < 70 ? 'border-yellow-400' : 'border-pink-500'
       }`}
-      whileHover={{ scale: 1.02 }}
-      whileTap={{ scale: 0.98 }}
+      whileHover={!disabled ? { scale: 1.02 } : {}}
+      whileTap={!disabled ? { scale: 0.98 } : {}}
     >
       <div className="flex justify-between items-center flex-wrap gap-2">
         <span className="text-base md:text-lg flex-grow truncate pr-2">{choice.text}</span>

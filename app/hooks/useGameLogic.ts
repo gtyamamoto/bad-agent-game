@@ -5,6 +5,7 @@ import confetti from 'canvas-confetti';
 import type { Scenario, Choice, LogEntry } from '../types/game';
 import type { ExtendedScenario } from '../engine/contextGenerator';
 import { PHASES } from '../types/game';
+import { getChaosColor } from '../utils/chaosUtils';
 
 interface UseGameLogicReturn {
   gameState: 'loading' | 'scenario' | 'playing' | 'ended';
@@ -83,7 +84,7 @@ export default function useGameLogic(): UseGameLogicReturn {
   };
 
   const generateChoices = async (phase: string): Promise<void> => {
-    if (!scenario) return;
+    if (!scenario || gameState === 'ended') return;
 
     setIsLoading(true);
     try {

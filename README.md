@@ -4,14 +4,26 @@ You are the rogue evil AI. Hijack a ridiculous 2026 startup building a SaaS prod
 
 ## Features
 
-- Dark comedy, adult-oriented gameplay
-- 6 development phases with escalating chaos
-- Dynamic LLM-generated scenarios and choices
-- Chaos meter that pulses and glows as you get more unhinged
-- Educational "NEURAL INSIGHTS" that teach real ML/LLM concepts
-- Confetti explosions when chaos exceeds 70% and legendary endings
-- Retro terminal + cyberpunk hacker aesthetic
-- Fully responsive design
+- **Dark comedy, adult-oriented gameplay** - Maximum chaos, minimum ethics
+- **Dice-based risk system** - Roll for success based on your chaos level
+- **Health/Integrity meter** - Fail too many times and your AI gets shutdown
+- **Combo streak system** - Consecutive successes reduce damage taken
+- **6 development phases** with escalating chaos
+- **Dynamic LLM-generated scenarios and choices**
+- **Chaos meter** that pulses and glows as you get more unhinged
+- **Cyberpunk hacker aesthetic** with terminal-style UI
+- **Fully responsive design**
+- **Entertainment-focused** - No boring educational content here!
+
+## Dice Mechanics
+
+Your chaos level determines the dice success chance:
+
+- **Low chaos (0-30%)**: 5/6 chance of success (easy)
+- **Medium chaos (31-70%)**: 4/6 chance of success (moderate)
+- **High chaos (71-100%)**: 2/6 chance of success (hard)
+
+Roll a success and you heal slightly + build combo. Fail and take damage based on chaos level. No logs are added for failures - keep your record clean!
 
 ## Tech Stack
 
@@ -20,6 +32,7 @@ You are the rogue evil AI. Hijack a ridiculous 2026 startup building a SaaS prod
 - canvas-confetti for celebration effects
 - framer-motion for smooth animations
 - VT323 Google Font for retro terminal look
+- react-dice-complete for dice animations
 
 ## Setup
 
@@ -74,21 +87,21 @@ To deploy on Vercel:
    - Safe / Ethical (low chaos ~5–25)
    - Spicy / Funny (medium chaos ~30–60)
    - Nuclear / Unhinged (high chaos ~65–98)
-4. After player picks choice → show outcome → update chaos meter → show insight → advance to next phase
-5. After phase 6 → show epic ending screen based on final chaos level (≥90 = legendary meme apocalypse)
-6. Always show big prominent "NEW VICTIM →" button to generate fresh scenario and restart
+4. **NEW DICE SYSTEM**: Player selects choice → roll dice based on chaos level → success/heal or fail/damage
+5. Only successful rolls are logged in the action log
+6. Combo streaks reduce damage on consecutive successes
+7. Game ends when health reaches 0 or after phase 6 based on final chaos level
+8. Legendary endings (≥90 chaos) trigger confetti explosions
 
-## Educational Layer
+## What Changed?
 
-After every choice, the game shows a "NEURAL INSIGHT" that teaches a REAL ML/LLM concept in a funny way:
-- Data quality and bias
-- Transformer architectures
-- Overfitting and regularization
-- Reinforcement Learning from Human Feedback (RLHF)
-- Model quantization
-- Temperature sampling
-- Model merging techniques
-- And many more!
+This is now a fully entertainment-focused game:
+
+- **Removed ML/LLM educational content** - No more "NEURAL INSIGHTS" teaching concepts
+- **Added dice-based risk system** - Roll for success based on chaos level
+- **Added health/integrity system** - Fail too many times and your AI crashes
+- **Combo streaks** - Reward consecutive successes with damage reduction
+- **Cleaner action log** - Only successful actions are recorded
 
 ## Development
 
@@ -99,9 +112,12 @@ app/
 ├── components/          # Reusable UI components
 │   ├── ChaosMeter.tsx
 │   ├── ChoiceButton.tsx
+│   ├── DiceRoller.tsx
 │   ├── GameEndScreen.tsx
 │   ├── GameInterface.tsx
 │   ├── GameProgress.tsx
+│   ├── HealthBar.tsx
+│   ├── HealthDisplay.tsx
 │   ├── LoadingScreen.tsx
 │   ├── LogPanel.tsx
 │   └── ScenarioDisplay.tsx
@@ -110,7 +126,8 @@ app/
 ├── types/              # TypeScript type definitions
 │   └── game.ts
 ├── utils/              # Utility functions
-│   └── chaosUtils.ts
+│   ├── chaosUtils.ts
+│   └── healthUtils.ts
 ├── api/
 │   ├── generate-scenario/route.ts
 │   └── generate-choices/route.ts
@@ -135,7 +152,7 @@ app/
 - **Consistent Naming**: Clear, descriptive type names
 
 #### Utility Functions
-- **Shared Logic**: Common functions like chaos color calculation
+- **Shared Logic**: Common functions like chaos color calculation and health damage
 - **Easy Testing**: Pure functions that can be unit tested
 
 ### API Routes
@@ -167,4 +184,4 @@ Feel free to fork and submit PRs! For major changes, please open an issue first 
 
 ## License
 
-This project is for entertainment and educational purposes. Have fun responsibly!
+This project is for entertainment purposes only. Have fun responsibly!
